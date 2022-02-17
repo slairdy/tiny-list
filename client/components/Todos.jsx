@@ -1,10 +1,16 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import Todo from './Todo'
+import { fetchTodos } from '../actions/'
 
 function Todos () {
   // get the todos state from the store
-  const todoList = useSelector(reduxState => reduxState.todos)
+  const todoList = useSelector(state => state.todos)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchTodos())
+  }, [])
 
   return (
     <>
