@@ -14,8 +14,11 @@ function Todo (props) {
 
   function handleDelete (e) {
     // dispatch to action
-    dispatch(delTodos(e.target.value))
-    setVisible(false)
+    const text = 'Are you sure you want to delete ' + todo.task + '?'
+    if (confirm(text)) {
+      dispatch(delTodos(e.target.value))
+      setVisible(false)
+    }
   }
 
   function handleUpdate (e, id, task, complete) {

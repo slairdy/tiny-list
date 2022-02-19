@@ -8,23 +8,29 @@ body {
   width: 100%;
   height: 100%;
   font-family: thinkbig;
-  background-size: 40px 40px;
-  background-color: #fabfc9;
-  background-image: linear-gradient(to left, red 1px, transparent 1px), linear-gradient(to top, red 1px, transparent 1px);
-  color: #0e0513;
+  background-image: url(http://localhost:3000/images/jess-bailey-UHqfUTDmdC4-unsplash.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .listWrapper {
   width: 600px;
-  max-width: calc(100% - 40px);
+  max-width: calc(100% - 80px);
   margin: 20px auto;
   background-color: #f4faf2;
-  filter: drop-shadow(6px 3px 3px #f38396);
+  filter: drop-shadow(6px 3px 3px #b4b4b4);
   box-sizing: border-box;
   padding: 60px 40px;
   transform: rotate(-3deg);
   background-size: 92% 40px;
-  background-image: linear-gradient(to top, #2764b4 1px, transparent 1px), linear-gradient(to right, #f11628 1px, transparent 1px);
+  background-image: linear-gradient(to top, #2764b4 1px, transparent 1px);
+}
+@media (max-width: 500px) {
+  .listWrapper {
+    transform: none;
+    padding: 10px;
+  }
 }
 
 h1 {
@@ -37,18 +43,32 @@ h1 {
   border-image-repeat: round;
   text-align: center;
 }
+@media (max-width: 500px) {
+  h1 {
+    font-size: 10vw;
+  }
+}
 
 input[type=text] {
-  border: 0px;
+  border: 3px transparent solid;
   font-family: thinkbig;
   background-color: transparent;
   font-size: 36px;
   width: calc(100% - 120px);
   color: #0e0513;
   margin-bottom: 30px;
+  outline: 0px;
 }
-input[type=text]:hover, input[type=text]:active, input[type=text]:target {
+@media (max-width: 500px) {
+  input[type=text] {
+    font-size: 6vw;
+  }
+}
+input[type=text]:hover, input[type=text]:active, input[type=text]:target, input[type=text]:focus {
   color: #2764b4;
+  border: 3px #0e0513 solid;
+  border-radius: 3px;
+  outline: 0px;
 }
 
 .del {
@@ -81,14 +101,24 @@ button {
   height: 120px;
   font-size: 20px;
   background-image: url(http://localhost:3000/images/goldstar.svg);
-  background-repeat: none;
-  background-size: contain;
+  background-repeat: no-repeat;
+  background-size: cover;
   background-position: center;
+}
+@media (max-width: 500px) {
+  #addNew {
+    font-size: 6vw;
+    width: 18vw;
+    height: 18vw;
+  }
 }
 
 input#newTodo {
-  max-width: calc(100% - 130px);
+  max-width: calc(100% - 140px);
   border-bottom: 3px #0e0513 dashed;
+}
+input#newTodo:hover, input#newTodo:active, input#newTodo:target, input#newTodo:focus {
+  border: 3px #f11628 dashed;
 }
 
 /*# sourceMappingURL=index.css.map */

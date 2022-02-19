@@ -35,7 +35,7 @@ function Todos () {
               }
             </>
           )
-        })}
+        }).reverse()}
         {todoList.map((todo, i) => {
           return (
             <>
@@ -45,7 +45,7 @@ function Todos () {
               }
             </>
           )
-        })}
+        }).reverse()}
         <input type="text" defaultValue="" id="newTodo" /><button id="addNew" onClick={handleCreateNew} value="add new"></button>
       </div>
     </>
