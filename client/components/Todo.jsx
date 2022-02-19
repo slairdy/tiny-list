@@ -12,30 +12,14 @@ function Todo (props) {
     setTodo(todoList[props.index])
   }, [todoList])
 
-  // on check = no set checked, checked against todo.complete
-
-  function handleCheck (e) {
-    // dispatch to action
-    const id = props.id
-    const task = todo.task
-    const complete = e.target.checked ? 1 : 0
-    setTodo({ id: id, task: task, complete: complete })
-    dispatch(updateTodos(id, task, complete))
-    console.log(e.target.checked)
-    console.log('todo local state: ' + todo.complete)
-    console.log('todo global state: ' + todoList[props.index].complete)
-  }
-
   function handleDelete (e) {
     // dispatch to action
     dispatch(delTodos(e.target.value))
     setVisible(false)
   }
 
-  function handleUpdate (e) {
-    const id = props.id
-    const task = e.target.value
-    const complete = todo.complete ? 1 : 0
+  function handleUpdate (e, id, task, complete) {
+    complete = complete ? 1 : 0
     setTodo({ id: id, task: task, complete: complete })
     dispatch(updateTodos(id, task, complete))
     console.log('todo local state: ' + todo.task)
@@ -48,10 +32,10 @@ function Todo (props) {
         ? <></>
         : <>
           {todo.complete
-            ? <><input onClick={handleCheck} type="checkbox" defaultChecked={todo.complete} name={todo.task} /><del><label htmlFor={todo.task}>{todo.task}</label></del></>
-            : <><input onClick={handleCheck} type="checkbox" defaultChecked={todo.complete} name={todo.task} /><label htmlFor={todo.task}>{todo.task}</label></>
+            ? <><input onClick={(e) => handleUpdate(e, props.id, todo.task, e.target.checked)} type="checkbox" defaultChecked={todo.complete} name={todo.task} /><del><label htmlFor={todo.task}>{todo.task}</label></del></>
+            : <><input onClick={(e) => handleUpdate(e, props.id, todo.task, e.target.checked)} type="checkbox" defaultChecked={todo.complete} name={todo.task} /><label htmlFor={todo.task}>{todo.task}</label></>
           }
-          <br /><button value={todo.id} onClick={handleDelete}>Delete {todo.task}</button> <input id={todo.id} onChange={handleUpdate} type='text' defaultValue={props.task} /><br /><br />
+          <br /><button value={todo.id} onClick={handleDelete}>Delete {todo.task}</button> <input id={todo.id} onChange={(e) => handleUpdate(e, props.id, e.target.value, todo.complete)} type='text' defaultValue={props.task} /><br /><br />
         </>
       }
     </>
