@@ -31,11 +31,13 @@ function Todo (props) {
       {!visible
         ? <></>
         : <>
-          {todo.complete
-            ? <><input onClick={(e) => handleUpdate(e, props.id, todo.task, e.target.checked)} type="checkbox" defaultChecked={todo.complete} name={todo.task} /><del><label htmlFor={todo.task}>{todo.task}</label></del></>
-            : <><input onClick={(e) => handleUpdate(e, props.id, todo.task, e.target.checked)} type="checkbox" defaultChecked={todo.complete} name={todo.task} /><label htmlFor={todo.task}>{todo.task}</label></>
-          }
-          <br /><button value={todo.id} onClick={handleDelete}>Delete {todo.task}</button> <input id={todo.id} onChange={(e) => handleUpdate(e, props.id, e.target.value, todo.complete)} type='text' defaultValue={props.task} /><br /><br />
+
+          <span className='checkWrap'>
+            <input onClick={(e) => handleUpdate(e, props.id, todo.task, e.target.checked)} type="checkbox" defaultChecked={todo.complete} name={todo.task} />
+          </span>
+          <input className={todo.complete ? 'del' : ''} id={todo.id} onChange={(e) => handleUpdate(e, props.id, e.target.value, todo.complete)} type='text' defaultValue={props.task} />
+          <button value={todo.id} onClick={handleDelete}>&times;</button>
+          <br />
         </>
       }
     </>
