@@ -1,10 +1,4 @@
-import { SET_TODOS } from '../actions/'
-
-// const initialState = [
-//   { id: 1, task: 'Vaccuum Lounge', complete: false },
-//   { id: 2, task: 'Fold & Put Away Laundry', complete: true },
-//   { id: 3, task: 'Wash Dishes', complete: false }
-// ]
+import { CLICK_TODO, SET_TODOS, POST_TODO, DELETE_TODO, UPDATE_TODO } from '../actions/'
 
 const initialState = []
 
@@ -12,16 +6,31 @@ const initialState = []
 export default function todos (state = initialState, action) {
   // clone todos state
   const newState = state
-  const index = action.id - 1
-  const checked = action.checked
+  const indexMatch = newState.findIndex((i) => { return i.id === action.id })
   switch (action.type) {
     case SET_TODOS:
       return action.todos
 
-    case 'CLICK_TODO':
+    case CLICK_TODO:
       // assign the checked boolean to the active todo item in the state
-      newState[index].complete = checked
+      newState[indexMatch].complete = action.complete
       return newState
+
+    case POST_TODO:
+      // add newly added task/todo to the state
+      newState.push({ task: action.task, id: action.id, complete: false })
+      return newState
+
+    case DELETE_TODO:
+      // remove task/todo from the state
+      newState.splice(indexMatch, 1)
+      return newState
+
+    case UPDATE_TODO:
+      // update task/todo
+      newState[indexMatch] = { task: action.task, complete: action.complete }
+      return newState
+
     default:
       return state
   }
