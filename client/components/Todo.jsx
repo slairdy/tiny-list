@@ -44,8 +44,6 @@ function Todo (props) {
     complete = complete ? 1 : 0
     setTodo({ id: id, task: task, complete: complete })
     dispatch(updateTodos(id, task, complete))
-    // console.log('todo local state: ' + todo.task)
-    // console.log('todo global state: ' + todoList[props.index].task)
   }
 
   return (
