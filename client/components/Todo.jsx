@@ -10,6 +10,7 @@ function Todo (props) {
 
   useEffect(() => {
     setTodo(todoList[props.index])
+    inputChange()
   }, [todoList])
 
   function handleDelete (e) {
@@ -21,12 +22,30 @@ function Todo (props) {
     }
   }
 
-  function handleUpdate (e, id, task, complete) {
+  function inputChange () {
+    let timer
+    const waitTime = 500
+    const taskInput = document.getElementById(todo.id)
+
+    if (taskInput) {
+      taskInput.addEventListener('keyup', (e) => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          handleUpdate(props.id, taskInput.value, todo.complete)
+        }, waitTime)
+      })
+      taskInput.addEventListener('keydown', (e) => {
+        clearTimeout(timer)
+      })
+    }
+  }
+
+  function handleUpdate (id, task, complete) {
     complete = complete ? 1 : 0
     setTodo({ id: id, task: task, complete: complete })
     dispatch(updateTodos(id, task, complete))
-    console.log('todo local state: ' + todo.task)
-    console.log('todo global state: ' + todoList[props.index].task)
+    // console.log('todo local state: ' + todo.task)
+    // console.log('todo global state: ' + todoList[props.index].task)
   }
 
   return (
@@ -36,9 +55,9 @@ function Todo (props) {
         : <>
 
           <span className='checkWrap'>
-            <input onClick={(e) => handleUpdate(e, props.id, todo.task, e.target.checked)} type="checkbox" defaultChecked={todo.complete} name={todo.task} />
+            <input onClick={(e) => handleUpdate(props.id, todo.task, e.target.checked)} type="checkbox" defaultChecked={todo.complete} name={todo.task} />
           </span>
-          <input className={todo.complete ? 'del' : ''} id={todo.id} onChange={(e) => handleUpdate(e, props.id, e.target.value, todo.complete)} type='text' defaultValue={props.task} />
+          <input className={todo.complete ? 'del' : ''} id={todo.id} type='text' defaultValue={props.task} />
           <button value={todo.id} onClick={handleDelete}>&times;</button>
           <br />
         </>
