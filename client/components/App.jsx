@@ -6,7 +6,7 @@ function App () {
     <>
       <div className="listWrapper">
         <header className="header">
-          <h1>A CRUDdy List</h1>
+          <h1>Tiny List</h1>
         </header>
         <div className="list">
           <Todos />
